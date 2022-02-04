@@ -1,0 +1,44 @@
+{% extends 'shop/base.html' %}
+{% block title %}درباره ما{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+	
+
+<div class="master-wrapper"> 
+    <div class="container">
+        <div class="row">
+            <section class="span12">  
+                <div class="checkout-container">
+                    <div class="row">
+                    	<div class="span10 offset1">
+        <p></p><br>
+		<h3>طراحی وب سایت فروشگاهی ست مارک:  </h3>
+		<p style="font-size:15px; text-align:left;"><strong style="font-size:20;">backend powered by:</strong> django, python</p>
+		<p style="font-size:15px; text-align:left;"><strong style="font-size:20;">front powered by:</strong> html, css, javasctipt, jquery, bootstrap</p>
+							<table class="table table-items">
+							    <tbody>						         
+							        <tr>
+							        	<td class="desc">طراح سایت: احمد خلیلی</td>							        																											
+							        </tr>
+									<hr>
+								    <tr>
+							        	<td class="desc">پست الکترونیکی: ahmadkhalili2020@gmail.com</td>																							
+							        </tr>
+							    </tbody>
+							</table>							
+							<div style="text-align: center;">
+							</div>
+							
+							
+                    	</div>
+                    </div>
+                </div>
+            </section> <!-- /main content -->
+        </div>
+    </div> <!-- /container -->
+</div> <!-- end of master-wrapper -->	
+	
+	{% include 'shop/footer.html' %}
+{% endblock %}

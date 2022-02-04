@@ -1,0 +1,246 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %} {{ product.meta_title }} {% endblock %}
+{% block description %}<meta name="description" content="{{ product.meta_description }}">{% endblock %}  <!--  must be in doubel cotation  -->
+{% block keywords %}{% endblock %}
+{% load humanize %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+
+    <!--  ==========  -->
+    <!--  = Breadcrumbs =  -->
+    <!--  ==========  -->
+    <div class="darker-stripe">
+        <div class="container">
+        	<div class="row">
+        		<div class="span12">
+        		    <ul class="breadcrumb">
+	                    <li>
+	                        <a href="{% url 'index' %}">ست مارک</a>
+	                    </li>
+	                    <li><span class="icon-chevron-right"></span></li>
+	                    <li>
+							<form action="{% url 'shop:product_list_by_category' %}" method="get" id='ah'>
+								<input type="hidden" name="{{ root.0 }}">
+								<a href="javascript:document.getElementById('ah').submit();">{{ root.1 }}</a>
+							</form>
+	                    </li>
+	                    <li><span class="icon-chevron-right"></span></li>
+	                    <li>
+							<form action="{% url 'shop:product_list_by_category' %}" method="get" id='aaH'>
+								<input type="hidden" name="{{ root.2 }}">
+								<a href="javascript:document.getElementById('aaH').submit();">{{ root.3 }}</a>
+							</form>						
+	                    </li>
+	                    <li><span class="icon-chevron-right"></span></li>
+	                    <li>
+	                        <p>{{ product.header }}</p>
+	                    </li>						
+	                </ul>
+        		</div>
+        	</div>
+        </div>
+    </div>
+
+    <!--  ==========  -->
+    <!--  = Main container =  -->
+    <!--  ==========  -->                	                        
+    <div class="container">
+        <div class="push-up top-equal blocks-spacer">
+            
+            <!--  ==========  -->
+            <!--  = Product =  -->
+            <!--  ==========  -->
+            <div class="row blocks-spacer">
+ 
+                <!--  ==========  -->
+                <!--  = Preview Images =  -->
+                <!--  ==========  -->
+                <div class="span5">
+                    <div class="product-preview">
+                        <div class="picture">
+                            <img src="{% if product.images.all.0 %}{{ product.images.all.0.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="{{ product.alt }}" width="940" height="940" id="mainPreviewImg" />
+                        </div>
+                        <div class="thumbs clearfix">
+                            <div class="thumb active" style="width: 20%;">
+                                <a href="#mainPreviewImg"><img src="{% if product.images.all.0 %}{{ product.images.all.0.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="{{ product.alt }}" /></a>
+                            </div>
+							{% for i in product.images.all|slice:"1:" %}
+                            <div class="thumb" style="width: 20%;">
+                                <a href="#mainPreviewImg"><img src="{{ i.image.url }}" alt="{{ i.product.alt }}" /></a>
+                            </div>
+							{% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--  ==========  -->
+                <!--  = Title and short desc =  -->
+                <!--  ==========  -->
+                <div class="span7">
+                    <div class="product-title">
+                        <h1 class="name"><span class="light">{{ product.header }}</span></h1>
+                    </div>
+                    <div class="product-description">
+                        <p>سامسونگ «گلکسی نوت 9» (Galaxy Note 8) را به بازار عرضه کرده است تا تجربه‌ی جدید و شگفت انگیزی از کارکردن با فلبت‌ها را برای کاربران به ارمغان آورد. گلکسی نوت‌ها به‌طور عمومی شبیه سری Galaxy S هستند؛ با این تفاوت که صفحه‌نمایش بزرگ‌تر و یک قلم دیجیتال S Pen دارند. این گوشی هم به گروه موبایل‌هایی با دو دوربین پیوسته است و دو دوربین ۱۲مگاپیکسلی با فلاش Dual LED...</p>
+                        <hr />
+                        <!--  ==========  -->
+                        <!--  = Add to cart form =  -->
+                        <!--  ==========  -->
+                        <form action="{% url 'cart:cart_add' product.id %}" class="form form-inline clearfix" method="post">
+                            {% csrf_token %}
+							{{ cart_product_form.quantity }}
+							{{ cart_product_form.update }}
+                            &nbsp;
+                            <select name="color" style="background-color:#CECACA;" class="span2">
+                                <option value="-1">انتخاب رنگ</option>
+                                <option value="blue">آبی</option>
+                                <option value="orange">نارنجی</option>
+                                <option value="black">مشکی</option>
+                            </select>
+                            &nbsp;
+                            <select name="size" style="background-color:#CECACA;" class="span2">
+                                <option value="-1">انتخاب سایز</option>
+                                <option value="XS">خیلی کوچک</option>
+                                <option value="S">کوچک</option>
+                                <option value="M">متوسط</option>
+                                <option value="L">بزرگ</option>
+                                <option value="XL">خیلی بزرگ</option>
+                                <option value="XXL">خیلی خیلی بزرگ</option>
+                            </select>
+							<span class="stock">
+                                <span class="stock">&nbsp;
+									{% if product.available %}<span class="btn btn-success">موجود</span> 
+									{% else %}<span class="btn btn-danger">اتمام موجودی</span>{% endif %}
+								</span>
+                            </span>
+                            <button type="submit" class="btn btn-danger pull-right"><i class="icon-shopping-cart"></i> اضافه به سبد خرید</button>
+                        </form><hr>
+                        <div class="meta">
+                            <span class="tag" style="font-size:20px; color:#000000">{{ product.price|intcomma }} تومان</span>
+                        </div>                        
+                        <hr />
+                        
+                        <!--  ==========  -->
+                        <!--  = Share buttons =  -->
+                        <!--  ==========  -->
+                        <div class="share-item">
+                            با دوستان خود به اشتراک بگذارید :
+                        </div>
+                        
+                    </div>
+                </div>				
+
+            </div>
+            
+            <!--  ==========  -->
+            <!--  = Tabs with more info =  -->
+            <!--  ==========  -->
+            <div class="row">
+                <div class="span12">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab-1" data-toggle="tab">جزئیات</a>
+                        </li>
+                        <li>
+                            <a href="#tab-2" data-toggle="tab">جدول مشخصات</a>
+                        </li>
+                        <li>
+                            <a href="#tab-3" data-toggle="tab">نظرات</a>
+                        </li>
+                        <li>
+                            <a href="#tab-4" data-toggle="tab">جزئیات ارسال</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="fade in tab-pane active" id="tab-1">                          
+                            {{ product.description |safe }}
+                            <h1>سرخط H1 30px</h1>
+                            <h2>سرخط H2 26px</h2>
+                            <h3>سرخط H3 20px</h3>
+                            <h4>سرخط H4 18px</h4>
+                            <h5>سرخط H5 15px</h5>
+                        </div>
+                        <div class="fade tab-pane" id="tab-2">
+                            <p>
+                                لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است. صنعت چاپ زمانی لازم بود شرایطی شما باید فکر ثبت نام و طراحی، لازمه خروج می باشد. در ضمن قاعده همفکری ها جوابگوی سئوالات زیاد شاید باشد، آنچنان که لازم بود طراحی گرافیکی خوب بود. کتابهای زیادی شرایط سخت ، دشوار و کمی در سالهای دور لازم است. هدف از این نسخه فرهنگ پس از آن و دستاوردهای خوب شاید باشد. حروفچینی لازم در شرایط فعلی لازمه تکنولوژی بود که گذشته، حال و آینده را شامل گردد. سی و پنج درصد از طراحان در قرن پانزدهم میبایست پرینتر در ستون و سطر حروف لازم است، بلکه شناخت این ابزار گاه اساسا بدون هدف بود و سئوالهای زیادی در گذشته بوجود می آید، تنها لازمه آن بود.  
+                            </p>
+                        </div>
+                        <div class="fade tab-pane" id="tab-3">
+                            <p>
+                                لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است. صنعت چاپ زمانی لازم بود شرایطی شما باید فکر ثبت نام و طراحی، لازمه خروج می باشد. در ضمن قاعده همفکری ها جوابگوی سئوالات زیاد شاید باشد، آنچنان که لازم بود طراحی گرافیکی خوب بود. کتابهای زیادی شرایط سخت ، دشوار و کمی در سالهای دور لازم است. هدف از این نسخه فرهنگ پس از آن و دستاوردهای خوب شاید باشد. حروفچینی لازم در شرایط فعلی لازمه تکنولوژی بود که گذشته، حال و آینده را شامل گردد. سی و پنج درصد از طراحان در قرن پانزدهم میبایست پرینتر در ستون و سطر حروف لازم است، بلکه شناخت این ابزار گاه اساسا بدون هدف بود و سئوالهای زیادی در گذشته بوجود می آید، تنها لازمه آن بود.  
+                            </p>
+                        </div>
+                        <div class="fade tab-pane" id="tab-4">
+                            <p>
+                                لورم ایپسوم متنی است که ساختگی برای طراحی و چاپ آن مورد است. صنعت چاپ زمانی لازم بود شرایطی شما باید فکر ثبت نام و طراحی، لازمه خروج می باشد. در ضمن قاعده همفکری ها جوابگوی سئوالات زیاد شاید باشد، آنچنان که لازم بود طراحی گرافیکی خوب بود. کتابهای زیادی شرایط سخت ، دشوار و کمی در سالهای دور لازم است. هدف از این نسخه فرهنگ پس از آن و دستاوردهای خوب شاید باشد. حروفچینی لازم در شرایط فعلی لازمه تکنولوژی بود که گذشته، حال و آینده را شامل گردد. سی و پنج درصد از طراحان در قرن پانزدهم میبایست پرینتر در ستون و سطر حروف لازم است، بلکه شناخت این ابزار گاه اساسا بدون هدف بود و سئوالهای زیادی در گذشته بوجود می آید، تنها لازمه آن بود...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+    
+    <!--  ==========  -->
+    <!--  = Related Products =  -->
+    <!--  ==========  -->
+    <div class="boxed-area no-bottom">
+        <div class="container">
+            
+            <!--  ==========  -->
+            <!--  = Title =  -->
+            <!--  ==========  -->
+            <div class="row">
+                <div class="span12">
+                    <div class="main-titles lined">
+                    	<h2 class="title"><span class="light">محصولات</span> مرتبط</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <!--  ==========  -->
+            <!--  = Related products =  -->
+            <!--  ==========  -->
+            <div class="row popup-products">
+                 
+                    
+                <!--  ==========  -->
+                <!--  = Products =  -->
+                <!--  ==========  -->
+				{% for product in related_products %}
+            	<div class="span3">
+            	    <div class="product">
+            	        <div class="product-img">
+                            <div class="picture">
+                                <img src="{% if product.images.all.0 %}{{ product.images.all.0.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="{{ product.alt }}" width="540" height="374" />
+                                <div class="img-overlay">
+                                    <a href="{% url 'shop:product_detail' product.id product.slug %}" class="btn more btn-primary">توضیحات بیشتر</a>
+                                    <a href="{% url 'cart:cart_add' product.id %}" class="btn buy btn-danger">اضافه به سبد خرید</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-titles no-margin">
+									<h6 class="title" style="height:50px;">{{ product.header }} <span style="font-size:17px;">   </span></h6>
+									<h4 class="no-margin" style="text-align: left;">{{ product.price|intcomma }} تومان</h4>
+                        </div>
+                        <p class="desc">توضیحاتی که در مورد محصول لازم است را در اینجا مینویسید</p>
+                        <p class="center-align stars">
+                            <span class="icon-star stars-clr"></span>
+                            <span class="icon-star stars-clr"></span>
+                            <span class="icon-star stars-clr"></span>
+                            <span class="icon-star stars-clr"></span>
+                            <span class="icon-star"></span>
+                        </p>
+            	    </div>
+            	</div> <!-- /product -->
+				{% endfor %}
+            	 
+            	
+            </div>
+        </div>
+    </div>	
+	{% include 'shop/footer.html' %}
+
+{% endblock %}

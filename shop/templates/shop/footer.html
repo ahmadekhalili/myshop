@@ -1,0 +1,144 @@
+﻿{% load static %}
+    <!--  ==========  -->
+    <!--  = Footer =  -->
+    <!--  ==========  -->
+    <footer>
+        
+        <!--  ==========  -->
+        <!--  = Upper footer =  -->
+        <!--  ==========  -->
+        <div class="foot-light">
+            <div class="container">
+                <div class="row">
+                    <div class="span4">
+                        <h2 class="pacifico">Setmark &nbsp; <img src="{% static 'images/webmarket.png' %}" alt="Webmarket Cart" class="align-baseline" /></h2>
+                        <p>فروشگاه اینترنتی ست مارک، فروشگاه اینترنتی با کالاهای دیجیتال محور در انواع مختلف همچون انواع گوشی، لپ تاپ و دوربین  می باشد.</p>
+                    </div>
+                    <div class="span4">
+                        <div class="main-titles lined">
+                            <h3 class="title">اینستاگرام</h3>
+                        </div>
+						<p>ست مارک را در شبکه‌های اجتماعی دنبال کنید:</p>
+						<a href="#"><img src="{% static 'images/insta_logo.png' %}"  height="60" width="200" alt="اینستگرام ست مارک" /></a>
+                    </div>
+                    <div class="span4">
+                        <div class="main-titles lined">
+                            <h3 class="title"><span class="light">عضویت</span> در خبرنامه</h3>
+                        </div>
+                        <p>این بخشی از یک نوشتار آزمایشی صرفا برای پر کردن این ناحیه است.</p>
+                        <!-- Begin MailChimp Signup Form -->
+						<form action="{% url 'index' %}" method="post" class="validate form form-inline">
+							{% csrf_token %}
+							<input type="email" value="" placeholder="آدرس ایمیلتان را وارد کنید" name="EMAIL" class="required email" id="mce-EMAIL">
+							<input type="submit" value="ارسال" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary">
+						</form>				
+                        <!--End mc_embed_signup-->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /upper footer -->
+        
+        <!--  ==========  -->
+        <!--  = Middle footer =  -->
+        <!--  ==========  -->
+        <div class="foot-dark">
+            <div class="container">
+                <div class="row">
+                    
+                    <!--  ==========  -->
+                    <!--  = Menu 1 =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="main-titles lined">
+                            <h3 class="title"><span class="light">ناوبری</span> اصلی</h3>
+                        </div>
+                        <ul class="nav bold">
+                            <li><a href="#">خانه</a></li>
+                            <li><a href="#">صفحات</a></li>
+                            <li><a href="#">درباره ما</a></li>
+                            <li><a href="#">کد های میانبر</a></li>
+                            <li><a href="#">گالری</a></li>
+                            <li><a href="#">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!--  ==========  -->
+                    <!--  = Menu 2 =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="main-titles lined">
+                            <h3 class="title"><span class="light">دومین</span> ناوبری</h3>
+                        </div>
+                        <ul class="nav">
+                            <li><a href="#">پیوند نوشتار آزمایشی</a></li>
+                            <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                            <li><a href="#">برند ها</a></li>
+                            <li><a href="#">مشاهده آخرین توییت ها</a></li>
+                            <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!--  ==========  -->
+                    <!--  = Menu 3 =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="main-titles lined">
+                            <h3 class="title"><span class="light">سومین</span> ناوبری</h3>
+                        </div>
+                        <ul class="nav">
+                            <li><a href="#">پیوند نوشتار آزمایشی</a></li>
+                            <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                            <li><a href="#">برند ها</a></li>
+                            <li><a href="#">مشاهده آخرین توییت ها</a></li>
+                            <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!--  ==========  -->
+                    <!--  = Menu 4 =  -->
+                    <!--  ==========  -->
+                    <div class="span3">
+                        <div class="main-titles lined">
+                            <h3 class="title"><span class="light">چهارمین</span> ناوبری</h3>
+                        </div>
+                        <ul class="nav">
+                            <li><a href="#">پیوند نوشتار آزمایشی</a></li>
+                            <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                            <li><a href="#">برند ها</a></li>
+                            <li><a href="#">مشاهده آخرین توییت ها</a></li>
+                            <li><a href="#">نوشتار آزمایشی دیگر</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+			
+        </div> <!-- /middle footer -->
+        
+        <!--  ==========  -->
+        <!--  = Bottom Footer =  -->
+        <!--  ==========  -->
+        <div class="foot-last">
+            <a href="#" id="toTheTop">
+                <span class="icon-chevron-up"></span>
+            </a>
+            <div class="container">
+                <div class="row">
+                    <div class="span6">
+                        &copy; Copyright 2019 <a target="_blank" href="#">محصول ویژه</a>.
+                    </div>
+                    <div class="span6">
+                        <div class="pull-right">وبسایت ست مارک طراحی شده توسط <a href="{% url 'shop:about_us' %}">احمد خلیلی</a></div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /bottom footer -->
+    </footer> <!-- /footer -->
+ 
+    
+    <!--  ==========  -->
+    <!--  = Modal Windows =  -->
+    <!--  ==========  -->
+
+    
+     
+    </div> <!-- end of master-wrapper -->

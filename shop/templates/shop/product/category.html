@@ -1,0 +1,322 @@
+{% extends 'shop/base.html' %}
+{% block title %}بهترین قیمت گوشی، لپ تاپ، دوربین، هدفون و غیره{% endblock %}
+{% block description %}<meta name="description" content="خرید اینترنتی جدیدترین کالاها شامل گوشی موبایل، هدفون، لپ تاپ و... با بهترین قیمت روز و مقایسه و لیست انواع کالاها در ست مارک فروشگاه اینترنتی ست مارک">{% endblock %}
+{% block keywords %}{% endblock %}
+{% load static %}
+{% load humanize %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+    <div class="darker-stripe">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+					{% if root.3 %}
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{% url 'index' %}">ست مارک</a>
+                        </li>
+                        <li><span class="icon-chevron-right"></span></li>
+                        <li>
+                            <form id='ww'>
+								<input type="hidden" name="{{ root.0 }}">
+								<a href="javascript:document.getElementById('ww').submit();">{{ root.1 }}</a>
+							</form>
+                        </li>
+                        <li><span class="icon-chevron-right"></span></li>
+                        <li>
+                            <a href="">{{ root.3 }}</a>
+                        </li>						
+                    </ul>
+					{% else %}{% if root.0 %}
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{% url 'index' %}">ست مارک</a>
+                        </li>
+                        <li><span class="icon-chevron-right"></span></li>
+                        <li>
+                            <a href="">{{ root.1 }}</a>
+                        </li>
+                    </ul>										
+					{% else %}
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{% url 'index' %}">ست مارک</a>
+                        </li>
+                        <li><span class="icon-chevron-right"></span></li>
+					</ul>
+					{% endif %}{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="push-up blocks-spacer">
+            <div class="row">
+                
+                <!--  ==========  -->
+                <!--  = Sidebar =  -->
+                <!--  ==========  -->
+                <aside class="span3 left-sidebar" id="tourStep1">
+                    <div class="sidebar-item sidebar-filters" id="sidebarFilters">
+                        
+                        <!--  ==========  -->
+                        <!--  = Sidebar Title =  -->
+                        <!--  ==========  -->
+                        <div class="underlined">
+                        	<h3><span class="light">بر اساس فیلتر</span> خرید کنید</h3>
+                        </div>
+                        
+                        <!--  ==========  -->
+                        <!--  = Categories =  -->
+                        <!--  ==========  -->
+						<form action="{% url 'shop:product_list_by_category' %}" method="get">
+							{% for key, values in categoriesTreeFa.items %}
+							
+								<div class="accordion-group" id="tourStep3">
+									<div class="accordion-heading">
+										<a class="accordion-toggle" data-toggle="collapse" href="#{% cycle '1' '2' '3' '4' '5' '6' %}">{{ key }} <b class="caret"></b></a>
+									</div>
+									<div id="{% cycle '1' '2' '3' '4' '5' '6' %}" class="accordion-body collapse in">
+										<div class="accordion-inner">
+											{% for cats, identifier in values %}
+												<a style="text-decoration: none;">
+												<input type="checkbox" name="{{ cats.1}}" value="" id="{{ cats.1}}" {% if identifier == cats.1 %} checked {% endif %}>										
+												<label style="display: inline;" for="{{ cats.1}}"> {{ cats.0}} </label><p></p>
+												</a>
+											{% endfor %}										
+										</div>
+									</div>
+								</div> <!-- /categories -->{% endfor %}				
+							<button type="submit" class="pull-left btn btn-primary btn-small push-down-10">اعمال</button>
+						</form>
+						
+                        
+                        <!--  ==========  -->
+                        <!--  = Prices slider =  -->
+                        <!--  ==========  -->
+						<form>						
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<a class="accordion-toggle" data-toggle="collapse" href="#filterPrices">قیمت <b class="caret"></b></a>
+								</div>
+								<div id="filterPrices" class="accordion-body in collapse">
+									<div class="accordion-inner with-slider">
+										<div class="jqueryui-slider-container">
+											<div id="pricesRange"></div>
+										</div>		
+										{% for cat in GET.cat %}
+										<input type="hidden" name="{{ cat }}">
+										{% endfor %}										
+										<input type="text" name="mx" class="max-val span1 pull-right" />
+										<input type="text" name="mn" class="min-val span1" />											
+									</div>
+							<button type="submit" class="pull-left btn btn-primary btn-small push-down-10">اعمال</a>
+								</div>							
+							</div> <!-- /prices slider -->						
+						</form>
+                        
+
+                        
+                        <!--  ==========  -->
+                        <!--  = Color filter =  -->
+                        <!--  ==========  -->
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#filterThree">رنگ <b class="caret"></b></a>
+                            </div>
+                            <div id="filterThree" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <a href="#" data-target="red" data-type="color" class="selectable detailed"><i class="box"></i> قرمز</a>
+<a href="#" data-target="green" data-type="color" class="selectable detailed"><i class="box"></i> سبز</a>
+<a href="#" data-target="blue" data-type="color" class="selectable detailed"><i class="box"></i> آبی</a>
+<a href="#" data-target="pink" data-type="color" class="selectable detailed"><i class="box"></i> صورتی</a>
+<a href="#" data-target="purple" data-type="color" class="selectable detailed"><i class="box"></i> بنفش</a>
+<a href="#" data-target="orange" data-type="color" class="selectable detailed"><i class="box"></i> نارنجی</a>
+ 
+                                </div>
+                            </div>
+                        </div> <!-- /color filter -->
+                        
+                        <!--  ==========  -->
+                        <!--  = Brand filter =  -->
+                        <!--  ==========  -->
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#filterFour">برند <b class="caret"></b></a>
+                            </div>
+                            <div id="filterFour" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <a href="#" data-target="s-oliver" data-type="brand" class="selectable detailed"><i class="box"></i> S. Oliver</a>
+<a href="#" data-target="nike" data-type="brand" class="selectable detailed"><i class="box"></i> Nike</a>
+<a href="#" data-target="naish" data-type="brand" class="selectable detailed"><i class="box"></i> Naish</a>
+<a href="#" data-target="adidas" data-type="brand" class="selectable detailed"><i class="box"></i> Adidas</a>
+<a href="#" data-target="puma" data-type="brand" class="selectable detailed"><i class="box"></i> Puma</a>
+<a href="#" data-target="shred" data-type="brand" class="selectable detailed"><i class="box"></i> Shred</a>
+ 
+                                </div>
+                            </div>
+                        </div> <!-- /brand filter -->
+                        
+                        <a href="#" class="remove-filter" id="removeFilters"><span class="icon-ban-circle"></span> حذف همه فیلتر ها</a>
+                        
+                    </div>
+                </aside> <!-- /sidebar -->
+                
+                <!--  ==========  -->
+                <!--  = Main content =  -->
+                <!--  ==========  -->
+                <section class="span9">
+                    
+                    <!--  ==========  -->
+                    <!--  = Title =  -->
+                    <!--  ==========  -->
+                    <div class="underlined push-down-20">
+                        <div class="row">
+                            <div class="span5">
+                                <h3><span class="light">همه</span> محصولات</h3>
+                            </div>
+                            <div class="span4">
+                                <div class="form-inline sorting-by" id="tourStep4">
+								<form>
+                                    <label for="isotopeSorting" class="black-clr">چینش :</label>
+									{% for cat in GET.cat %}
+									<input type="hidden" name="{{ cat }}">
+									{% endfor %}
+									{% if GET.side_price %}
+									<input type="hidden" name="mx" value={{ GET.side_price.0 }} />
+									<input type="hidden" name="mn" value={{ GET.side_price.1 }} />	
+									{% endif %}	
+									{% if GET.search %}
+									<input type="hidden" name="search" value="{{ GET.search }}">
+									{% endif %}										
+                                    <select name="slct" class="span3" onChange="submit();">
+										<option value=''></option>
+                                        <option value='0' {% if selector == '0x' %}selected{% endif %}>بر اساس قیمت (کم به زیاد) &uarr;</option>
+                                        <option value='1'{% if selector == '1x' %}selected{% endif %}>بر اساس قیمت (زیاد به کم) &darr;</option>
+										<option value='2'{% if selector == '2x' %}selected{% endif %}>بر اساس فروش(زیاد به کم) &darr;</option>
+                                        <option value='3'{% if selector == '3x' %}selected{% endif %}>(نزولی)جدیدترین &darr;</option>                                       
+                                    </select>																				
+								</form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /title -->
+                    
+                    <!--  ==========  -->
+                    <!--  = Products =  -->
+                    <!--  ==========  -->	
+                    <div class="row popup-products">
+                        <div id="" class="isotope-container">	
+						{% for product in prs_pgs_crnt_gr.0 %}
+                    	    <div class="span3 filter--blazers" style="height: 440px;">
+                    	        <div class="product">
+                	                {% if product.stock %}{% else %}<div class="stamp red">تمام شد</div>{% endif %}           	                     
+                    	            <div class="product-img">
+                    	                <div class="picture">
+                    	                    <img src="{% if product.images.all.0 %}{{ product.images.all.0.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" width="540" height="374" alt="{{ product.alt }}"/>
+                    	                    <div class="img-overlay">
+                    	                        <a href="{% url 'shop:product_detail' product.id product.slug %}" class="btn more btn-primary">توضیحات بیشتر</a>
+												<form action="{% url 'cart:cart_add' product.id %}" class="form form-inline clearfix" method="post">
+													{% csrf_token %}
+													<input type="hidden" name="quantity" value="1">																															
+													<button type="submit" class="btn buy btn-danger pull-right">خرید</button>
+												</form>  
+                    	                    </div>
+                    	                </div>
+                    	            </div>
+                    	            <div class="main-titles no-margin"  style="width:250px; padding:0px 12px 0px 12px;">
+										<h6 class="title" style="height:50px;"><span style="font-size:17px;">{{ product.header }}</span></h6>
+										<h4 class="no-margin" style="text-align: left;">{{ product.price|intcomma }} تومان</h4>
+                    	            </div>
+                    	            <p class="center-align stars">
+                    	                <span class="icon-star stars-clr"></span>
+                    	                <span class="icon-star stars-clr"></span>
+                    	                <span class="icon-star"></span>
+                    	                <span class="icon-star"></span>
+                    	                <span class="icon-star"></span>
+                    	                 
+                    	            </p>
+                    	        </div>
+                    	    </div> <!-- /single product -->							
+						{% endfor %}
+						</div>
+					</div>
+					
+                	<hr />
+                </section> <!-- /main content -->
+            </div>
+        </div>
+        {% if prs_pgs_crnt_gr.1 %}
+		<div style="display: flex; justify-content: center;">
+			<div style="display:flex; width:280px; justify-content:space-between; height:22px;">
+			
+				<!----------     right felesh     ----------->
+				<form id='z'>                <!----  care ids owned by header.html   ---->
+					{% for cat in GET.cat %}
+					<input type="hidden" name="{{ cat }}">
+					{% endfor %}	
+					{% if GET.select_cat %}
+					<input type="hidden" name="slct" value="{{ GET.select_cat }}">
+					{% endif %}	
+					{% if GET.side_price %}
+					<input type="hidden" name="mx" value={{ GET.side_price.0 }} />
+					<input type="hidden" name="mn" value={{ GET.side_price.1 }} />	
+					{% endif %}	
+					{% if GET.search %}
+					<input type="hidden" name="search" value="{{ GET.search }}">
+					{% endif %}					
+					<input type="hidden" name="page" value="{{ prs_pgs_crnt_gr.3.0 }}">
+					<a href="javascript:document.getElementById('z').submit();" class="breadcrumb" style="margin-top: 0px; color:#00becc; line-height: 25px;">
+						<span class="icon-chevron-sign-right"><span class="icon-chevron-sign-right"></span></span></li>
+					</a>
+				</form>	
+							
+				{% for page in prs_pgs_crnt_gr.1 %}
+					<form>
+						{% for cat in GET.cat %}
+						<input type="hidden" name="{{ cat }}">
+						{% endfor %}
+						{% if GET.select_cat %}
+						<input type="hidden" name="slct" value="{{ GET.select_cat }}">
+						{% endif %}
+						{% if GET.side_price %}
+						<input type="hidden" name="mx" value={{ GET.side_price.0 }} />
+						<input type="hidden" name="mn" value={{ GET.side_price.1 }} />	
+						{% endif %}	
+						{% if GET.search %}
+						<input type="hidden" name="search" value="{{ GET.search }}">
+						{% endif %}						
+						<input type="hidden" name="page" value="{{ page }}">
+						<button type="submit" style="display:flex; align-items:center;" {% if page == prs_pgs_crnt_gr.2 %} class="btn btn-mini" {% else %} class="btn btn-primary btn-mini" {% endif %}> {{ page }}  </button>						
+					</form>	
+				{% endfor %}
+							
+				<!----------     left felesh     ----------->
+				<form id='zz'>
+					{% for cat in GET.cat %}
+					<input type="hidden" name="{{ cat }}">
+					{% endfor %}
+					{% if GET.select_cat %}
+					<input type="hidden" name="slct" value="{{ GET.select_cat }}">
+					{% endif %}
+					{% if GET.side_price %}
+					<input type="hidden" name="mx" value={{ GET.side_price.0 }} />
+					<input type="hidden" name="mn" value={{ GET.side_price.1 }} />	
+					{% endif %}	
+					{% if GET.search %}
+					<input type="hidden" name="search" value="{{ GET.search }}">
+					{% endif %}						
+					<input type="hidden" name="page" value="{{ prs_pgs_crnt_gr.3.1 }}">
+					<a href="javascript:document.getElementById('zz').submit();" class="breadcrumb" style="margin-top: 0px; color:#00becc; line-height: 25px;">
+						<span class="icon-chevron-sign-left"><span class="icon-chevron-sign-left"></span></span>
+					</a>
+				</form>								
+							
+			</div>
+		</div>
+		{% endif %}
+    </div> <!-- /container -->					
+	
+	{% include 'shop/footer.html' %}
+{% endblock %}

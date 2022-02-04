@@ -1,0 +1,4 @@
+{% autoescape off %}
+جهت فعال سازی بر روی لینک زیر کلیک نمایید
+http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}
+{% endautoescape %}

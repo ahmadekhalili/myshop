@@ -1,0 +1,51 @@
+{% extends 'shop/base.html' %}
+{% block title %}پروفایل{% if user.first_name %} - {{ user.first_name }}{% endif %}{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+	
+<div class="master-wrapper"> 
+    <div class="container">
+        <div class="row">
+            <section class="span12">  
+                <div class="checkout-container">
+                    <div class="row">
+                    	<div class="span10 offset1">
+        <p></p><br>
+		
+							<table class="table table-items">
+							    <tbody>						         
+							        <tr>
+							        	<td class="desc">نام: {{ user.first_name }}</td>
+							        	<td class="desc">نام خانوادگی: {{ user.last_name }}</td>																										
+							        </tr>
+									<hr>
+							        <tr>
+							        	<td class="desc">پست الکترونیکی: {{ user.email }}</td>
+							        	<td class="desc">شماره تلفن همراه: &lrm;{{ user.phone }}</td>																									
+							        </tr>
+									<p><p>
+								    <tr>
+							        	<td style="direction:rtl;" class="desc">آدرس: {{ user.address }}</td>																								
+							        </tr>
+							    </tbody>
+							</table>							
+							<div style="text-align: center;">
+								<form action="{% url 'users:profile_change' set_pointer %}" method="get">
+									<button class="icon-edit" style="margin-left: 30px;"> ویرایش</button>
+									<a href="{% url 'logout' %}" class="icon-share" >خروج</a>
+								</form>
+							</div>
+							<a href="{% url 'orders:products_ordered' %}"> لیست کالای سفارش داده شده </a>
+							
+                    	</div>
+                    </div>
+                </div>
+            </section> <!-- /main content -->
+        </div>
+    </div> <!-- /container -->
+</div> <!-- end of master-wrapper -->	
+	
+	{% include 'shop/footer.html' %}
+{% endblock %}

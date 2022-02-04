@@ -1,0 +1,30 @@
+{% extends 'shop/base.html' %}
+{% block title %}عضویت Setmark{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+	
+
+<div class="master-wrapper"> 
+    <div class="container">
+        <div class="row">
+            <section class="span12">  
+                <div class="checkout-container">
+                    <div class="row">
+                    	<div class="span10 offset1">
+								<div style="height: 400px;">
+									<hr><hr>
+									<p>لينک فعالسازی به ايميل شما ارسال شد. جهت فعال سازی، به ايمیل خود مراجعه نماييد.</p>
+									<p>لطفا در صورت عدم مشاهده ایمیل، به بخش اسپم ایمیل مراجعه نمایید. با تشکر</p>
+								</div>
+						</div>
+                    </div>
+                </div>
+            </section> <!-- /main content -->
+        </div>
+    </div> <!-- /container -->
+</div> <!-- end of master-wrapper -->	
+	
+	{% include 'shop/footer.html' %}
+{% endblock %}

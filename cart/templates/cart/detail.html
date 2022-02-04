@@ -1,0 +1,93 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}سبد خرید | فروشگاه اینترنتی ست مارک{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+
+    <div class="master-wrapper"> 
+    <div class="container">
+        <div class="row">
+            <!--  ==========  -->
+            <!--  = Main content =  -->
+            <!--  ==========  -->
+            <section class="span12">  
+                <div class="checkout-container">
+                    <div class="row">
+                    	<div class="span10 offset1">
+						
+						
+						<p></p><br>
+							<table class="table table-items">
+							    <thead>
+							    	<tr>
+							    		<th colspan="2">آیتم</th>
+							    		<th><div class="align-center">تعداد</div></th>
+							    		<th><div class="align-right">قیمت</div></th>
+							    	</tr>
+							    </thead>
+							    <tbody>
+								<form action="{% url 'cart:set_fingers' %}" method="post" id='ax'>
+								{% for item in cart %}
+									{% with product=item.product %}						         
+							        <tr>
+							        	<td class="image" style="padding: 8px 8px 8px 2px;"><img src="{% if product.images.all.0 %}{{ product.images.all.0.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" alt="{{ product.alt }}" width="124" height="124" /></td>						   
+										<td class="desc"><a href="/cart/remove/{{product.id}}/{{path}}" class="icon-minus-sign" title="حذف آیتم"></a> &nbsp;{{ product.header }}</td>
+																			
+										<td class="qty">
+											{% csrf_token %}
+											{% if product.stock %}
+												<select name="{{ product.id }}" class="input-mini">	
+												{% for t in range %}
+													<option value="{{ t }}" {% if t == item.quantity %} selected {% endif %}>{{ t }}</option>
+												{% endfor %}
+												</select> 
+											{% else %}
+												<h3>0</h3>
+											{% endif %}																
+										</td>	
+										
+							        	<td class="price" style="font-size: 16px;">{{ product.price|intcomma }} تومان</td>
+							        </tr>
+							        {% endwith %}
+								{% endfor %}
+								
+							        <tr>
+							        	<td colspan="2" rowspan="2">
+							        	    <div class="alert alert-info">
+                                                <button data-dismiss="alert" class="close" type="button">×</button>
+                                                هزینه ارسال بر اساس منطقه جغرافیایی محاسبه میشود. <a href="#">اطلاعات بیشتر</a>
+                                            </div>
+							        	</td>
+							        	<td class="stronger">هزینه ارسال :</td>
+							        	<td class="stronger"><div class="align-right">......</div></td>
+							        </tr>
+							        <tr>
+							        	<td class="stronger">جمع کل :</td>
+							        	<td class="stronger"><div class="size-16 align-right">{{ cart.get_total_price|intcomma }} تومان</div></td>
+							        </tr>
+							    </tbody>
+							</table>
+							
+							<hr />
+							
+							<p class="right-align">
+							    در مرحله بعدی شما آدرس ارسال را انتخاب خواهید کرد. &nbsp; &nbsp;
+							    <a href="javascript:document.getElementById('ax').submit();" class="btn btn-primary higher bold">ادامه</a>
+							</p>
+							</form>	
+							
+							
+							
+							
+                    	</div>
+                    </div>
+                </div>
+            </section> <!-- /main content -->
+        </div>
+    </div> <!-- /container -->
+    </div> <!-- end of master-wrapper -->	
+	{% include 'shop/footer.html' %}
+{% endblock %}

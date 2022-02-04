@@ -1,0 +1,47 @@
+{% extends 'shop/base.html' %}
+{% block title %}پروفایل{% if user.first_name %} - {{ user.first_name }}{% endif %}{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block content %} 
+    {% include 'shop/header.html' %}
+	
+
+<div class="master-wrapper"> 
+    <div class="container">
+        <div class="row">
+            <section class="span12">  
+                <div class="checkout-container">
+                    <div class="row">
+                    	<div class="span10 offset1">
+        <p></p><br>
+						<form action="{% url 'users:profile' %}" method="post" enctype ="multipart/form-data">
+							{% csrf_token %}
+							<table class="table table-items">
+							    <tbody>						         
+							        <tr>
+							        	<td class="desc">نام: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ CustomUserChangeForm.first_name }}</td>
+							        	<td class="desc">نام خانوادگی: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ CustomUserChangeForm.last_name }}</td>																										
+							        </tr>
+									<hr>
+							        <tr>
+							        	<td class="desc">پست الکترونیکی: {{ CustomUserChangeForm.email }}</td>
+							        	<td class="desc">شماره تلفن همراه: &lrm;{{ CustomUserChangeForm.phone }}</td>																									
+							        </tr>
+									<p><p>
+								    <tr>
+							        	<td style="direction:rtl;" class="desc">آدرس:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ CustomUserChangeForm.address }}</td>																									
+							        </tr>
+							    </tbody>
+							</table>
+							<button type="submit">ویرایش</button>
+						</form>	
+                    	</div>
+                    </div>
+                </div>
+            </section> <!-- /main content -->
+        </div>
+    </div> <!-- /container -->
+</div> <!-- end of master-wrapper -->	
+	
+	{% include 'shop/footer.html' %}
+{% endblock %}

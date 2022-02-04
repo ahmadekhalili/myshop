@@ -1,0 +1,259 @@
+{% load static %}
+{% load humanize %}
+    <div class="master-wrapper">
+    <!--  ==========  -->
+    <!--  = Header =  -->
+    <!--  ==========  -->
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                
+                <!--  ==========  -->
+                <!--  = Logo =  -->
+                <!--  ==========  -->
+                <div class="span7">
+                    <a class="brand" href="{% url 'index' %}">
+                        <img src="{% static 'images/logo.png' %}" alt="Webmarket Logo" width="48" height="48" /> 
+                        <span class="pacifico">Setmark</span> 
+                        <span class="tagline">سایت فروشگاهی ست مارک</span> 
+                    </a>
+                </div>
+                
+                <!--  ==========  -->
+                <!--  = Social Icons =  -->
+                <!--  ==========  -->
+                <div class="span5">
+                    <div class="topmost-line">
+
+                        </div>
+                    </div>
+                    <div class="top-right">
+                        <div class="icons">
+                            <a href="#"><span class="zocial-facebook"></span></a>
+                            <a href="#"><span class="zocial-skype"></span></a>
+                            <a href="#"><span class="zocial-twitter"></span></a>
+                            <a href="#"><span class="zocial-rss"></span></a>
+                            <a href="#"><span class="zocial-wordpress"></span></a>
+                            <a href="#"><span class="zocial-android"></span></a>
+                            <a href="#"><span class="zocial-html5"></span></a>
+                            <a href="#"><span class="zocial-windows"></span></a>
+                            <a href="#"><span class="zocial-apple"></span></a>
+                        </div>
+						{% if user.is_authenticated %}
+							{% if user.first_name and user.last_name %}
+								<a href="{% url 'users:profile' %}">{{ user.first_name }} {{ user.last_name }}</a>
+							{% else %}
+								<a href="{% url 'users:profile' %}">{{ user.email }}</a>
+							{% endif %}
+					</div>
+						{% else %}
+                        <div class="register">
+                            <a href="{% url 'login' %}" role="button" data-toggle="modal">ورود</a> یا  
+                            <a href="{% url 'users:signup' %}" role="button" data-toggle="modal">ثبت نام</a>
+                        </div>
+						{% endif %}
+                    </div>
+                </div> <!-- /social icons -->
+            </div>
+        </div>
+    </header>
+    
+    <!--  ==========  -->
+    <!--  = Main Menu / navbar =  -->
+    <!--  ==========  -->
+    <div class="navbar navbar-static-top" id="stickyNavbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="row">
+            <div class="span9">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                
+                <!--  ==========  -->
+                <!--  = Menu =  -->
+                <!--  ==========  -->
+                <div class="nav-collapse collapse">
+                  <ul class="nav" id="mainNavigation">
+                    <li class="dropdown active">
+						<a href="javascript:document.getElementById('a').submit();" class="dropdown-toggle">
+							گوشی <b class="caret"></b> 
+							<form action="{% url 'shop:product_list_by_category' %}" id='a' style="margin: 0 0 0 0px;">
+								<input type="hidden" name="{{ categories_tree.0.0 }}">		
+							</form>
+						</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown active">
+                                <a href="javascript:document.getElementById('aa').submit();"> 
+									سامسونگ 
+									<form action="{% url 'shop:product_list_by_category' %}" id='aa' style="margin: 0 0 0 0px;">										
+										<input type="hidden" name="samsung">	
+									</form>									
+								</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:document.getElementById('aaa').submit();"> 
+									ال جی 
+									<form action="{% url 'shop:product_list_by_category' %}" id='aaa' style="margin: 0 0 0 0px;">
+										<input type="hidden" name="lg">	
+									</form>									
+								</a>
+                            </li>							
+                            <li class="dropdown">
+                                <a href="javascript:document.getElementById('aaaa').submit();"> 
+									اپل 
+									<form action="{% url 'shop:product_list_by_category' %}" id='aaaa' style="margin: 0 0 0 0px;">	
+										<input type="hidden" name="apple">								
+									</form>										
+								</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="javascript:document.getElementById('b').submit();" class="dropdown-toggle"> 
+							لپ تاپ <b class="caret"></b>
+							<form action="{% url 'shop:product_list_by_category' %}" id='b' style="margin: 0 0 0 0px;">	
+								<input type="hidden" name="{{ categories_tree.1.0 }}">								
+							</form>	
+						</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown active">
+                                <a href="javascript:document.getElementById('bb').submit();"> 
+									ایسوس 
+									<form action="{% url 'shop:product_list_by_category' %}" id='bb' style="margin: 0 0 0 0px;">
+										<input type="hidden" name="asus">								
+									</form>									
+								</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:document.getElementById('c').submit();" class="dropdown-toggle">
+							دوربین <b class="caret"></b>
+							<form action="{% url 'shop:product_list_by_category' %}" id='c' style="margin: 0 0 0 0px;">	
+								<input type="hidden" name="{{ categories_tree.2.0 }}">								
+							</form>	
+						</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown active">
+                                <a href="javascript:document.getElementById('cc').submit();"> 
+									کانن 
+									<form action="{% url 'shop:product_list_by_category' %}" id='cc' style="margin: 0 0 0 0px;">	
+										<input type="hidden" name="canon">								
+									</form>										
+								</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:document.getElementById('ccc').submit();"> 
+									نیکون 
+									<form action="{% url 'shop:product_list_by_category' %}" id='ccc' style="margin: 0 0 0 0px;">	
+										<input type="hidden" name="nikon">								
+									</form>										
+								</a>
+                            </li>							
+                            <li class="dropdown">
+                                <a href="javascript:document.getElementById('cccc').submit();">
+									سونی 
+									<form action="{% url 'shop:product_list_by_category' %}" id='cccc' style="margin: 0 0 0 0px;">
+										<input type="hidden" name="sony">								
+									</form>										
+								</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:document.getElementById('d').submit();" class="dropdown-toggle">
+							هدفون <b class="caret"></b> 
+							<form action="{% url 'shop:product_list_by_category' %}" id='d' style="margin: 0 0 0 0px;">	
+								<input type="hidden" name="{{ categories_tree.3.0 }}">								
+							</form>								
+						</a>
+                        <ul class="dropdown-menu">
+                            <li>
+								<a href="javascript:document.getElementById('dd').submit();"> 
+									سنهایزر 
+									<form action="{% url 'shop:product_list_by_category' %}" id='dd' style="margin: 0 0 0 0px;">	
+										<input type="hidden" name="sennheiser">								
+									</form>										
+								</a>
+							</li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'shop:about_us' %}">درباره ما</a></li>
+                    <li><a href="{% url 'index' %}">تماس با ما</a></li>
+                  </ul>
+                  
+                  <!--  ==========  -->
+                  <!--  = Search form =  -->
+                  <!--  ==========  -->
+                  <form action="{% url 'shop:product_search' %}" method="get" class="navbar-form pull-right">	
+                      <input type="text" class="span1" name="search" id="navSearchInput">
+					  <button type="submit"><span class="icon-search"></span></button>                     
+                  </form>
+                </div><!-- /.nav-collapse -->
+            </div>
+            
+            <!--  ==========  -->
+            <!--  = Cart =  -->
+            <!--  ==========  -->
+            <div class="span3">
+                <div class="cart-container" id="cartContainer">
+                    <div class="cart">
+                        <p class="items">سبد خرید <span class="dark-clr">({{ cart.get_products_numbers }})</span></p>
+                        <p class="dark-clr hidden-tablet">{{ cart.get_total_price|intcomma }} تومان</p>
+                        <a href="{% url 'cart:cart_detail' %}" class="btn btn-danger">
+                            <!-- <span class="icon icons-cart"></span> -->
+                            <i class="icon-shopping-cart"></i>
+                        </a>
+                    </div>
+                    <div class="open-panel">
+                        {% for item in cart %}
+							{% with product=item.product %}
+                        <div class="item-in-cart clearfix">
+                            <div class="image">
+                                <img src="{% if product.images.all.0 %}{{ product.images.all.0.image.url }}{% else %}{% static 'images/no_image.png' %}{% endif %}" width="124" height="124" alt="{{ product.alt }}" />
+                            </div>
+                            <div class="desc">
+                                <strong><a href="{% url 'shop:product_detail' product.id product.slug %}">{{ product.name }}</a></strong>
+                                <span class="light-clr qty">
+                                    {{item.quantity}} : تعداد
+                                    &nbsp;
+                                    <a href="/cart/remove/{{product.id}}/{{path}}" class="icon-minus-sign" title="Remove Item"></a>
+                                </span>
+                            </div>
+                            <div class="price">
+                                <strong>{{ product.price|intcomma }}</strong>
+                            </div>
+                        </div>
+							{% endwith %}
+						{% endfor %}
+                         
+						 
+                        <div class="summary">
+                            <div class="line">
+                                <div class="row-fluid">
+                                    <div class="span6" style="direction:ltr;">هزینه ارسال :</div>
+                                    <div class="span6 align-right">----</div>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="row-fluid">
+                                    <div class="span6" style="direction:ltr;">جمع کل :</div>
+                                    <div class="span6 align-right size-16">{{ cart.get_total_price|intcomma }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proceed">
+                            <a href="{% url 'cart:cart_detail' %}" class="btn btn-danger pull-right bold higher">تصویه حساب <i class="icon-shopping-cart"></i></a>
+                            <small>هزینه ارسال بر اساس منطقه جغرافیایی محاسبه میشود. <a href="#">اطلاعات بیشتر</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /cart -->
+          </div>
+        </div>
+      </div>
+    </div> <!-- /main menu -->
